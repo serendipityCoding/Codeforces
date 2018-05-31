@@ -2,28 +2,16 @@
 using namespace std;
 int main(){
     long long n,k,m,d;
-    long long first=0;
     while(cin>>n>>k>>m>>d){
         long long max=0;
-        long long total=n;
-        for(long long c=1;c<=m;c++){
+        for(long long c=m;c>0;c--){
             long long first=0;
-            bool isEnd=false;
-            for(long long i=0;i<d;i++){
-                for(long long j=0;j<k;j++){
-                    if(n>=c){
-                        if(j==0) first+=c;
-                        n-=c;
-                    }
-                    else{
-                        isEnd=true;
-                        break;
-                    }
-                }
-                if(isEnd==true) break;
-            }
-            if(first>max) max=first;
-            n=total;
+            long long t=d;
+            long long times=n/(k*c);
+            long long remain=n-t*k*c;
+            if(remain<0||remain==n) first=c;
+            else if (remain>=c&&(d-times)>0) first+=c;
+            if(max<first) max=first;
         }
         cout<<max<<endl;
     }
